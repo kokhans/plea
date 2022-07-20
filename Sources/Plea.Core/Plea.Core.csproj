@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Authors>Serhii Kokhan</Authors>
+    <Description>Plea is a .NET 6 implementation of JSend specification for a simple, no-frills, JSON-based format for application-level communication.</Description>
+    <Copyright>© 2022 Serhii Kokhan</Copyright>
+    <PackageTags>plea, jsend</PackageTags>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Submodules\carcass\Sources\Carcass.Core\Carcass.Core.csproj" />
+    <ProjectReference Include="..\..\Submodules\carcass\Sources\Carcass.Metadata\Carcass.Metadata.csproj" />
+    <ProjectReference Include="..\..\Submodules\carcass\Sources\Logging\Carcass.Logging.Core\Carcass.Logging.Core.csproj" />
+  </ItemGroup>
+
+</Project>
