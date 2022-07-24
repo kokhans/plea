@@ -1,12 +1,72 @@
 ﻿# Plea [![GitHub](https://img.shields.io/github/license/kokhans/plea?style=flat-square)](LICENSE)
 
-Plea is a [.NET 6](https://docs.microsoft.com/en-us/dotnet/core/whats-new/dotnet-6) implementation of [JSend](https://github.com/omniti-labs/jsend) specification for a simple, no-frills, JSON-based format for application-level communication.
+`Plea` is a `.NET 6` implementation of [JSend](https://github.com/omniti-labs/jsend) specification for a simple, no-frills, JSON-based format for application-level communication.
 
 ## Status
 
 ### Pre-Alpha
 
 The software is still under active development and not feature complete or ready for consumption by anyone other than software developers. There may be milestones during the pre-alpha which deliver specific sets of functionality, and nightly builds for other developers or users who are comfortable living on the absolute bleeding edge.
+
+## Getting Started
+
+### Prerequisites
+
+- [.NET 6 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
+
+### Installation
+
+To install `Plea.Core` and its dependencies via `.NET Core CLI`, execute the following command.
+
+```powershell
+dotnet add package Plea.Core
+```
+
+To install `Plea.Core` and its dependencies via `NuGet`, execute the following command.
+
+```powershell
+Install-Package Plea.Core
+```
+
+### Basic Usage
+
+To register `Plea.Core` and its dependencies, use the following code.
+
+```csharp
+using Carcass.Metadata.Stores.Abstracts;
+
+services
+    .AddCarcassLoggerAdapterFactory()
+    .AddCarcassInMemoryMetadataStore()
+    .AddCarcassAdHocMetadataAccessor()
+    .AddPlea();
+```
+
+To extend the controller with `Plea` functionality, inherit it from `PleaController`.
+
+```csharp
+[Route("api/posts")]
+public sealed class PostController : PleaController
+{
+    public PostController(IAdHocMetadataAccessor adHocMetadataAccessor) : base(adHocMetadataAccessor)
+    {
+    }
+}
+```
+
+To return the successful `Plea` response from the method, use the following code.
+
+```csharp
+[HttpGet]
+public async Task<ActionResult<IEnumerable<Post>>> GetPostsAsync(
+	CancellationToken cancellationToken = default
+)
+{
+	// ...
+	return await PleaOkAsync(posts);
+}
+```
 
 ## Specification
 
@@ -20,7 +80,7 @@ The software is still under active development and not feature complete or ready
 
 When an API call is successful, the Plea object is used as a simple envelope for the results, using the data key, as in the following.
 
-GET /posts
+**GET /posts**
 
 ```json
 {
@@ -49,7 +109,7 @@ GET /posts
 }
 ```
 
-GET /posts/1
+**GET /posts/1**
 
 ```json
 {
