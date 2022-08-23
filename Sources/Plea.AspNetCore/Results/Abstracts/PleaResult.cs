@@ -20,26 +20,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Collections.ObjectModel;
-using Carcass.Core;
+using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using Plea.Core.Responses.Abstracts;
 
-namespace Plea.Core.Responses;
+// ReSharper disable UnusedTypeParameter
 
-public sealed class PleaErrorResponse : IPleaErrorResponse
+namespace Plea.AspNetCore.Results.Abstracts;
+
+public interface IPleaResult<out TPleaResponse> : IActionResult where TPleaResponse : IPleaResponse
 {
-    public PleaErrorResponse(
-        ReadOnlyDictionary<string, object?> metadata,
-        string? message = default
-    )
+}
+
+public abstract class PleaResult<TPleaResponse> : ObjectResult, IPleaResult<TPleaResponse>
+    where TPleaResponse : IPleaResponse
+{
+    protected PleaResult(TPleaResponse pleaResponse, HttpStatusCode httpStatusCode) : base(pleaResponse)
     {
-        ArgumentVerifier.NotNull(metadata, nameof(metadata));
-
-        Metadata = metadata;
-        Message = message;
+        StatusCode = (int) httpStatusCode;
     }
-
-    public PleaStatus Status => PleaStatus.Error;
-    public ReadOnlyDictionary<string, object?> Metadata { get; }
-    public string? Message { get; }
 }

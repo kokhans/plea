@@ -21,25 +21,13 @@
 // SOFTWARE.
 
 using System.Collections.ObjectModel;
-using Carcass.Core;
-using Plea.Core.Responses.Abstracts;
+using Plea.AspNetCore.Results.Successes.Abstracts;
 
-namespace Plea.Core.Responses;
+namespace Plea.AspNetCore.Results.Successes;
 
-public sealed class PleaErrorResponse : IPleaErrorResponse
+public sealed class PleaOkResult<TData> : PleaSuccessResult<TData>
 {
-    public PleaErrorResponse(
-        ReadOnlyDictionary<string, object?> metadata,
-        string? message = default
-    )
+    public PleaOkResult(ReadOnlyDictionary<string, object?> metadata, TData? data = default) : base(metadata, data)
     {
-        ArgumentVerifier.NotNull(metadata, nameof(metadata));
-
-        Metadata = metadata;
-        Message = message;
     }
-
-    public PleaStatus Status => PleaStatus.Error;
-    public ReadOnlyDictionary<string, object?> Metadata { get; }
-    public string? Message { get; }
 }

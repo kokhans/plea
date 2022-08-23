@@ -17,21 +17,21 @@ The software is still under active development and not feature complete or ready
 
 ### Installation
 
-To install `Plea.Core` and its dependencies via `.NET Core CLI`, execute the following command.
+To install `Plea.AspNetCore` and its dependencies via `.NET Core CLI`, execute the following command.
 
 ```powershell
-dotnet add package Plea.Core
+dotnet add package Plea.AspNetCore
 ```
 
-To install `Plea.Core` and its dependencies via `NuGet`, execute the following command.
+To install `Plea.AspNetCore` and its dependencies via `NuGet`, execute the following command.
 
 ```powershell
-Install-Package Plea.Core
+Install-Package Plea.AspNetCore
 ```
 
 ### Basic Usage
 
-To register `Plea.Core` and its dependencies, use the following code.
+To register `Plea.AspNetCore` and its dependencies, use the following code.
 
 ```csharp
 using Carcass.Metadata.Stores.Abstracts;

@@ -6,19 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Authors>Serhii Kokhan</Authors>
-    <Description>Plea is a .NET 6 implementation of JSend specification for a simple, no-frills, JSON-based format for application-level communication.</Description>
+    <Description>Core abstactions, interfaces and types used by Plea.* libraries.</Description>
     <Copyright>© 2022 Serhii Kokhan</Copyright>
     <PackageTags>plea, jsend</PackageTags>
-
   </PropertyGroup>
 
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Carcass.Logging.Core" Version="0.0.1-dev1" />
-    <PackageReference Include="Carcass.Metadata" Version="0.0.1-dev1" />
+    <PackageReference Include="Carcass.Core" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

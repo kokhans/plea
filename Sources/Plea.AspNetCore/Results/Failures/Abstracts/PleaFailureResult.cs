@@ -21,25 +21,19 @@
 // SOFTWARE.
 
 using System.Collections.ObjectModel;
-using Carcass.Core;
-using Plea.Core.Responses.Abstracts;
+using System.Net;
+using Plea.AspNetCore.Results.Abstracts;
+using Plea.Core.Responses;
 
-namespace Plea.Core.Responses;
+namespace Plea.AspNetCore.Results.Failures.Abstracts;
 
-public sealed class PleaErrorResponse : IPleaErrorResponse
+public abstract class PleaFailureResult : PleaResult<PleaFailureResponse>
 {
-    public PleaErrorResponse(
+    protected PleaFailureResult(
         ReadOnlyDictionary<string, object?> metadata,
-        string? message = default
-    )
+        string? reason = default,
+        HttpStatusCode httpStatusCode = HttpStatusCode.BadRequest
+    ) : base(new PleaFailureResponse(metadata, reason), httpStatusCode)
     {
-        ArgumentVerifier.NotNull(metadata, nameof(metadata));
-
-        Metadata = metadata;
-        Message = message;
     }
-
-    public PleaStatus Status => PleaStatus.Error;
-    public ReadOnlyDictionary<string, object?> Metadata { get; }
-    public string? Message { get; }
 }

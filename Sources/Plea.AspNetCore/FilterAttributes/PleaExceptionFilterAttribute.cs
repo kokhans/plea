@@ -20,39 +20,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using Bogus;
+using Carcass.Core;
+using Carcass.Logging.Core.Adapters;
+using Carcass.Logging.Core.Adapters.Abstracts;
 using Carcass.Metadata.Accessors.AdHoc.Abstracts;
-using Microsoft.AspNetCore.Mvc;
-using Plea.AspNetCore.Controllers.Abstracts;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.DependencyInjection;
+using Plea.AspNetCore.Results.Errors;
 
-namespace Plea.Sample.WebApi.Controllers;
+namespace Plea.AspNetCore.FilterAttributes;
 
-[Route("api/posts")]
-public sealed class PostController : PleaController
+public sealed class PleaExceptionFilterAttribute : ExceptionFilterAttribute
 {
-    public PostController(IAdHocMetadataAccessor adHocMetadataAccessor) : base(adHocMetadataAccessor)
+    public override async Task OnExceptionAsync(ExceptionContext context)
     {
-    }
+        ArgumentVerifier.NotNull(context, nameof(context));
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Post>>> GetPostsAsync(
-        CancellationToken cancellationToken = default
-    )
-    {
-        cancellationToken.ThrowIfCancellationRequested();
+        ILoggerAdapterFactory loggerAdapterFactory =
+            context.HttpContext.RequestServices.GetRequiredService<ILoggerAdapterFactory>();
+        LoggerAdapter<PleaExceptionFilterAttribute> loggerAdapter =
+            loggerAdapterFactory.CreateLoggerAdapter<PleaExceptionFilterAttribute>();
+        IAdHocMetadataAccessor adHocMetadataAccessor =
+            context.HttpContext.RequestServices.GetRequiredService<IAdHocMetadataAccessor>();
 
-        Random random = new();
+        context.ExceptionHandled = true;
+        context.Result = new PleaInternalServerErrorResult(
+            await adHocMetadataAccessor.GetMetadataAsync(),
+            context.Exception.Message
+        );
 
-        IEnumerable<Post> posts = new Faker<Post>()
-            .StrictMode(true)
-            .RuleFor(p => p.Id, f => ++f.IndexFaker)
-            .RuleFor(p => p.Title, f => $"Post {f.IndexFaker}")
-            .RuleFor(p => p.Body, f => f.Lorem.Lines(1))
-            .Generate(random.Next(15))
-            .ToArray();
-
-        AdHocMetadataAccessor.WithAdHocMetadata("cid", Guid.NewGuid().ToString());
-
-        return await PleaOkAsync(posts);
+        loggerAdapter.LogError(context.Exception);
     }
 }
