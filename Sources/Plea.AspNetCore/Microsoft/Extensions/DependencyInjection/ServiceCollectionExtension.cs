@@ -1,4 +1,4 @@
-﻿// MIT License
+// MIT License
 //
 // Copyright (c) 2022 Serhii Kokhan
 //
@@ -20,26 +20,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Collections.ObjectModel;
 using Carcass.Core;
-using Plea.Core.Responses.Abstracts;
+using Plea.AspNetCore.FilterAttributes;
 
-namespace Plea.Core.Responses;
+// ReSharper disable CheckNamespace
 
-public sealed class PleaErrorResponse : IPleaErrorResponse
+namespace Microsoft.Extensions.DependencyInjection;
+
+public static class ServiceCollectionExtension
 {
-    public PleaErrorResponse(
-        ReadOnlyDictionary<string, object?> metadata,
-        string? message = default
-    )
+    public static IServiceCollection AddPlea(this IServiceCollection services)
     {
-        ArgumentVerifier.NotNull(metadata, nameof(metadata));
+        ArgumentVerifier.NotNull(services, nameof(services));
 
-        Metadata = metadata;
-        Message = message;
+        return services.AddSingleton<PleaExceptionFilterAttribute>();
     }
-
-    public PleaStatus Status => PleaStatus.Error;
-    public ReadOnlyDictionary<string, object?> Metadata { get; }
-    public string? Message { get; }
 }

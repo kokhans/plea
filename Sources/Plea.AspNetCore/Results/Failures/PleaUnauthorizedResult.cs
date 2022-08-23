@@ -21,25 +21,17 @@
 // SOFTWARE.
 
 using System.Collections.ObjectModel;
-using Carcass.Core;
-using Plea.Core.Responses.Abstracts;
+using System.Net;
+using Plea.AspNetCore.Results.Failures.Abstracts;
 
-namespace Plea.Core.Responses;
+namespace Plea.AspNetCore.Results.Failures;
 
-public sealed class PleaErrorResponse : IPleaErrorResponse
+public sealed class PleaUnauthorizedResult : PleaFailureResult
 {
-    public PleaErrorResponse(
+    public PleaUnauthorizedResult(
         ReadOnlyDictionary<string, object?> metadata,
-        string? message = default
-    )
+        string? reason = "Unauthorized."
+    ) : base(metadata, reason, HttpStatusCode.Unauthorized)
     {
-        ArgumentVerifier.NotNull(metadata, nameof(metadata));
-
-        Metadata = metadata;
-        Message = message;
     }
-
-    public PleaStatus Status => PleaStatus.Error;
-    public ReadOnlyDictionary<string, object?> Metadata { get; }
-    public string? Message { get; }
 }
