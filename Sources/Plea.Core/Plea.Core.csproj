@@ -17,9 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Submodules\carcass\Sources\Carcass.Core\Carcass.Core.csproj" />
-    <ProjectReference Include="..\..\Submodules\carcass\Sources\Carcass.Metadata\Carcass.Metadata.csproj" />
-    <ProjectReference Include="..\..\Submodules\carcass\Sources\Logging\Carcass.Logging.Core\Carcass.Logging.Core.csproj" />
+    <PackageReference Include="Carcass.Logging.Core" Version="0.0.1-dev1" />
+    <PackageReference Include="Carcass.Metadata" Version="0.0.1-dev1" />
   </ItemGroup>
 
 </Project>
