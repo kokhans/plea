@@ -93,7 +93,7 @@ public sealed class PleaResultFilterAttributeTests
         pleaFailureResponse.Reason.Should().BeNullOrWhiteSpace();
     }
 
-    private static IEnumerable<object[]> BadRequestData()
+    public static IEnumerable<object[]> BadRequestData()
     {
         yield return new object[] { new ObjectResult(null) };
         yield return new object[] { new JsonResult(null) };
