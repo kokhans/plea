@@ -40,7 +40,7 @@ using Xunit;
 
 namespace Plea.AspNetCore.UnitTests;
 
-public sealed class PleaResultFilterAttributeTests
+public sealed class PleaResultFilterAttributeTest
 {
     [Theory]
     [MemberData(nameof(BadRequestData))]

@@ -1,12 +1,12 @@
 ﻿# Plea [![GitHub](https://img.shields.io/github/license/kokhans/plea?style=flat-square)](LICENSE)
 
-`Plea` is a `.NET 6` implementation of [JSend](https://github.com/omniti-labs/jsend) specification for a simple, no-frills, JSON-based format for application-level communication.
+Plea is a .NET 6 implementation of [JSend](https://github.com/omniti-labs/jsend) specification for a simple, no-frills, JSON-based format for application-level communication.
 
 ## Status
 
-### Pre-Alpha
+### Alpha
 
-The software is still under active development and not feature complete or ready for consumption by anyone other than software developers. There may be milestones during the pre-alpha which deliver specific sets of functionality, and nightly builds for other developers or users who are comfortable living on the absolute bleeding edge.
+The software is complete enough for internal testing. This is typically done by people other than the software engineers who wrote it, but still within the same organization or community that developed the software.
 
 ## Getting Started
 
@@ -43,7 +43,7 @@ services
     .AddPlea();
 ```
 
-To extend the controller with `Plea` functionality, inherit it from `PleaController`.
+To extend the controller with Plea functionality, inherit it from `PleaController`.
 
 ```csharp
 [Route("api/posts")]
@@ -55,7 +55,7 @@ public sealed class PostController : PleaController
 }
 ```
 
-To return the successful `Plea` response from the method, use the following code.
+To return the successful Plea response from the method, use the following code.
 
 ```csharp
 [HttpGet]
@@ -80,7 +80,7 @@ public async Task<ActionResult<IEnumerable<Post>>> GetPostsAsync(
 
 When an API call is successful, the Plea object is used as a simple envelope for the results, using the data key, as in the following.
 
-**GET /posts**
+GET /posts
 
 ```json
 {
@@ -109,7 +109,7 @@ When an API call is successful, the Plea object is used as a simple envelope for
 }
 ```
 
-**GET /posts/1**
+GET /posts/1
 
 ```json
 {
