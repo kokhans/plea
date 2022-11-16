@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Plea is a .NET 6 implementation of JSend specification for a simple, no-frills, JSON-based format for application-level communication.</Description>
+    <Description>Plea is a .NET 7 implementation of JSend specification for a simple, no-frills, JSON-based format for application-level communication.</Description>
     <PackageTags>plea, jsend</PackageTags>
   </PropertyGroup>
 
@@ -10,8 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Carcass.Logging.Core" Version="1.0.0-alpha.2" />
-    <PackageReference Include="Carcass.Metadata" Version="1.0.0-alpha.2" />
+    <PackageReference Include="Carcass.Logging.Core" Version="1.0.0-alpha.4" />
+    <PackageReference Include="Carcass.Metadata" Version="1.0.0-alpha.4" />
   </ItemGroup>
 
   <ItemGroup>
