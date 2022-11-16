@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Carcass.Core" Version="1.0.0-alpha.2" />
+    <PackageReference Include="Carcass.Core" Version="1.0.0-alpha.4" />
   </ItemGroup>
 
 </Project>

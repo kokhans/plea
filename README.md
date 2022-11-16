@@ -1,6 +1,6 @@
 ﻿# Plea [![GitHub](https://img.shields.io/github/license/kokhans/plea?style=flat-square)](LICENSE)
 
-Plea is a .NET 6 implementation of [JSend](https://github.com/omniti-labs/jsend) specification for a simple, no-frills, JSON-based format for application-level communication.
+Plea is a .NET 7 implementation of [JSend](https://github.com/omniti-labs/jsend) specification for a simple, no-frills, JSON-based format for application-level communication.
 
 ## Status
 
@@ -12,7 +12,7 @@ The software is complete enough for internal testing. This is typically done by 
 
 ### Prerequisites
 
-- [.NET 6 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- [.NET 7 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
 - [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
 
 ### Installation
